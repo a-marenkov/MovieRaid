@@ -69,11 +69,9 @@
                 android:gravity="center_vertical"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/bg_transparent_accent_ripple"
-                android:foregroundTint="@color/white"
                 android:paddingRight="6dp"
                 android:drawableLeft="@drawable/ic_fav"
-                android:drawablePadding="6dp"
-                app:srcCompat="@drawable/ic_fav" />
+                android:drawablePadding="6dp" />
 
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="56dp"
-    xmlns:tools="http://schemas.android.com/tools"
     app:cardElevation="12dp">
 
     <LinearLayout
@@ -17,7 +17,6 @@
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_margin="16dp"
-            android:clickable="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             app:srcCompat="@drawable/ic_close_black_24dp" />
 
@@ -30,8 +29,8 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:maxLines="1"
-            tools:text="Title"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:text="Title" />
 
         <android.widget.Space
             android:layout_width="24dp"
