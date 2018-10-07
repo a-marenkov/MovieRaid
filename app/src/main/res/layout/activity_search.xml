@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="12dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TIL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:hint="@string/hint_search"
+                android:imeActionId="1111"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:letterSpacing="0.0178571429"
+                android:maxLines="2"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/transparentWhite"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                style="@style/TitleWhite"
+                android:layout_width="65dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_marginStart="8dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/img_tmdb" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/BodyWhite"
+                android:text="@string/favorites"
+                android:id="@+id/btnFav"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_transparent_accent_ripple"
+                android:foregroundTint="@color/white"
+                android:paddingRight="6dp"
+                android:drawableLeft="@drawable/ic_fav"
+                android:drawablePadding="6dp"
+                app:srcCompat="@drawable/ic_fav" />
+
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <ProgressBar
+        android:id="@+id/pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnLoadMore"
+        style="@style/AccentBigBtn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="8dp"
+        android:text="@string/load_more"
+        android:translationY="100dp" />
+
+    <Button
+        android:id="@+id/btnScrollUp"
+        style="@style/AccentBigBtn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="8dp"
+        android:text="@string/scroll_up"
+        android:translationY="100dp" />
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/empty_search" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

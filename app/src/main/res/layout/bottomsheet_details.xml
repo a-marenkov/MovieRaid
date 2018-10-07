@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<amarenkov.movieraid.screens.DetailsBottomsheet xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottomsheet">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".MainActivity">
+
+            <View
+                android:id="@+id/handle"
+                android:layout_width="32dp"
+                android:layout_height="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_handle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/holder_poster"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/colorAccent"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp"
+                app:layout_constraintDimensionRatio="w,0.65:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/handle">
+
+                <ImageView
+                    android:id="@+id/ivPoster"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                tools:text="Название фильма"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/holder_poster" />
+
+            <TextView
+                android:id="@+id/tvTitleOriginal"
+                style="@style/Subtitle"
+                android:layout_width="0dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="16dp"
+                tools:text="Название фильма в оригинале"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+            <TextView
+                android:id="@+id/tvOverview"
+                style="@style/Body"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                tools:text="Описание фильма"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleOriginal" />
+
+            <TextView
+                android:id="@+id/tvChip"
+                style="@style/Body"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/chip_selected"
+                android:gravity="center"
+                tools:text="Рейтинг 9.1\nПроголосовало 222"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tvDuration"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/holder_poster"
+                app:layout_constraintTop_toBottomOf="@+id/ivFavorite"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <ImageView
+                android:id="@+id/ivFavorite"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:layout_constraintEnd_toStartOf="@+id/ivShare"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/holder_poster"
+                app:layout_constraintTop_toTopOf="@+id/holder_poster"
+                app:srcCompat="@drawable/ic_fav" />
+
+            <ImageView
+                android:id="@+id/ivShare"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/ivFavorite"
+                app:layout_constraintTop_toTopOf="@+id/ivFavorite"
+                app:srcCompat="@drawable/ic_share" />
+
+            <TextView
+                android:id="@+id/tvDuration"
+                style="@style/BodySecondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                tools:text="Продолжительность: 127 минут"
+                app:layout_constraintBottom_toTopOf="@+id/tvGenre"
+                app:layout_constraintEnd_toEndOf="@+id/tvChip"
+                app:layout_constraintStart_toStartOf="@+id/tvChip"
+                app:layout_constraintTop_toBottomOf="@+id/tvChip" />
+
+            <TextView
+                android:id="@+id/tvGenre"
+                style="@style/BodySecondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                tools:text="Жанр: драма"
+                app:layout_constraintBottom_toTopOf="@+id/tvBudget"
+                app:layout_constraintEnd_toEndOf="@+id/tvDuration"
+                app:layout_constraintStart_toStartOf="@+id/tvDuration"
+                app:layout_constraintTop_toBottomOf="@+id/tvDuration" />
+
+            <TextView
+                android:id="@+id/tvBudget"
+                style="@style/BodySecondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                tools:text="Бюджет: 1,000,000 $"
+                app:layout_constraintBottom_toBottomOf="@+id/holder_poster"
+                app:layout_constraintEnd_toEndOf="@+id/tvGenre"
+                app:layout_constraintStart_toStartOf="@+id/tvGenre"
+                app:layout_constraintTop_toBottomOf="@+id/tvGenre" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/holder_backdrop"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/colorAccent"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:layout_constraintDimensionRatio="1:0.65"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTagline">
+
+                <ImageView
+                    android:id="@+id/ivBackdrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvCast"
+                style="@style/BodySecondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                tools:text="Актерский состав:"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/holder_backdrop" />
+
+            <TextView
+                android:id="@+id/tvCrew"
+                style="@style/BodySecondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                tools:text="Команда:"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCast"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/tvTagline"
+                style="@style/BodySecondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                tools:text="Слоган фильма"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvOverview" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_bottomsheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:visibility="gone" />
+</amarenkov.movieraid.screens.DetailsBottomsheet>
+

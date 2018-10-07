@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Movie Raid</string>
+    <string name="rating_and_votes">Рейтинг %1$.1f\n%2$d %3$s</string>
+    <string name="vote0">голосов</string>
+    <string name="vote1">голос</string>
+    <string name="vote2">голоса</string>
+    <string name="movie_duration_no_data">Продолжительность: нет данных</string>
+    <string name="movie_duration">Продолжительность: %1$d %2$s</string>
+    <string name="minute0">минут</string>
+    <string name="minute1">минута</string>
+    <string name="minute2">минуты</string>
+    <string name="movie_genres">Жанр: %1$s</string>
+    <string name="movie_genres_no_data">Жанр: нет данных</string>
+    <string name="movie_budget">Бюджет: $ %1$s</string>
+    <string name="movie_budget_no_data">Бюджет: нет данных</string>
+    <string name="cast">Актерский состав:\n%1$s</string>
+    <string name="cast_no_data">Актерский состав: нет данных</string>
+    <string name="crew">Создатели:\n%1$s</string>
+    <string name="crew_no_data">Создатели: нет данных</string>
+    <string name="cancel">Отменить</string>
+    <string name="repeat">Повторить</string>
+    <string name="share_title">Поделитесь с друзьями</string>
+    <string name="share_text">Рекомендую посмотреть фильм "%1$s"\n%2$s</string>
+    <string name="snack_removed_from_favs">Фильм исключен из избранных</string>
+    <string name="snack_no_internet">Нет интернет соединения</string>
+    <string name="snack_error">Ошибка - что-то пошло не так…</string>
+    <string name="snack_added_to_favs">Фильм добавлен в избранное</string>
+    <string name="hint_search">Поиск по названию</string>
+    <string name="favorites">Избранное</string>
+    <string name="load_more">Загрузить еще</string>
+    <string name="scroll_up">Вернуться в начало</string>
+    <string name="empty_search">Список фильмов пуст</string>
+    <string name="more">Подробнее</string>
+    <string name="empty_favorite">Список избранных фильмов пуст</string>
+</resources>

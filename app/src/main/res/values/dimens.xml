@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_spacing_4">4dp</dimen>
+    <dimen name="item_spacing_8">8dp</dimen>
+    <dimen name="item_bottom_spacing">64dp</dimen>
+    <dimen name="poster_ratio">0.65</dimen>
+</resources>
