@@ -1,6 +1,8 @@
 package amarenkov.movieraid.screens.splash
 
 import amarenkov.movieraid.R
+import amarenkov.movieraid.managers.AppJob
+import amarenkov.movieraid.managers.JobsManager
 import amarenkov.movieraid.managers.MovieManager
 import amarenkov.movieraid.network.NetworkClient
 import amarenkov.movieraid.screens.search.SearchActivity
@@ -10,6 +12,7 @@ import amarenkov.movieraid.utils.sp
 import amarenkov.movieraid.utils.ui
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import com.google.android.material.snackbar.Snackbar
@@ -26,6 +29,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     fun init() {
+        bg { JobsManager.scheduleRecurring(this@SplashActivity, AppJob.UPDATE_JOB) }
         bg {
             MovieManager.updateEndpoints()
             MovieManager.updateGenres(isFirstStart)
@@ -36,7 +40,11 @@ class SplashActivity : AppCompatActivity() {
                 else snack(getString(R.string.snack_no_internet), Snackbar.LENGTH_INDEFINITE, getString(R.string.repeat), { init() })
             }.ifNull {
                 proceed()
+                return@invokeOnCompletion
             }
+            if (!isFirstStart) Handler().postDelayed({
+                proceed()
+            }, 2000L)
         }
     }
 

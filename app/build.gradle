@@ -52,11 +52,11 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.media:media:1.0.0'
-    implementation 'androidx.vectordrawable:vectordrawable-animated:1.0.0'
+//    implementation 'androidx.vectordrawable:vectordrawable-animated:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     // Flexbox
-    implementation 'com.google.android:flexbox:1.1.0'
+//    implementation 'com.google.android:flexbox:1.1.0'
     // Room
     implementation 'androidx.room:room-runtime:2.0.0'
     kapt "androidx.room:room-compiler:2.0.0"
@@ -79,6 +79,8 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 //    implementation 'jp.wasabeef:glide-transformations:3.3.0'
+    // jobdispatcher
+    implementation "com.firebase:firebase-jobdispatcher:0.8.5"
 
 //    implementation 'androidx.multidex:multidex:2.0.0'
 
