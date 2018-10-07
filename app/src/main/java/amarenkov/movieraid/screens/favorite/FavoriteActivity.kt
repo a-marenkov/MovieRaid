@@ -43,6 +43,7 @@ class FavoriteActivity : BaseActivity(), ListCallback<Movie> {
         with(rv) {
             layoutManager = LinearLayoutManager(this@FavoriteActivity, RecyclerView.HORIZONTAL, false)
             setHasFixedSize(true)
+            this@FavoriteActivity.adapter.setHasStableIds(true)
             adapter = this@FavoriteActivity.adapter
             onItemSelected = { position ->
                 tvHeader.switchText(this@FavoriteActivity.adapter.getLabel(position))
@@ -83,8 +84,7 @@ class FavoriteActivity : BaseActivity(), ListCallback<Movie> {
                 if (!it.isFavorite) adapter.remove(it)
             }
         }
-        detailsBottomsheet.enableToolbar { bottomsheetDialog.cancel() }
-        detailsBottomsheet.onShare = { poster, title, overview -> shareMovie(poster, title, overview) }
+        detailsBottomsheet.init({ bottomsheetDialog.cancel() }, { poster, title, overview -> shareMovie(poster, title, overview) })
         viewModel.movie.observe(this, Observer {
             detailsBottomsheet.bind(it)
             bottomsheetDialog.setState(BottomSheetBehavior.STATE_COLLAPSED)

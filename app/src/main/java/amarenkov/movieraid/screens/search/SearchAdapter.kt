@@ -20,6 +20,8 @@ class SearchAdapter(private val callback: ListCallback<Movie>) : RecyclerView.Ad
 
     override fun getItemCount() = movies.size
 
+    override fun getItemId(position: Int) = movies[position].id
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MovieVH(
             LayoutInflater.from(parent.context).inflate(R.layout.item_movie_search, parent, false))
 
@@ -52,6 +54,15 @@ class SearchAdapter(private val callback: ListCallback<Movie>) : RecyclerView.Ad
     }
 
     inner class MovieVH(root: View) : RecyclerView.ViewHolder(root) {
+        init {
+            root.btnMore.dozedClick {
+                callback.onItemSelected(movies[adapterPosition])
+            }
+            root.dozedClick {
+                callback.onItemSelected(movies[adapterPosition])
+            }
+        }
+
         fun bind(movie: Movie) {
             with(itemView) {
                 ivPoster.load(movie.poster, ImageSize.W500)
@@ -59,12 +70,6 @@ class SearchAdapter(private val callback: ListCallback<Movie>) : RecyclerView.Ad
                 tvGenres.text = MovieManager.decodeGenres(movie.genreIds)
                 tvRating.text = movie.rating.toString()
                 tvOverview.text = movie.overview
-                btnMore.dozedClick {
-                    callback.onItemSelected(movie)
-                }
-                itemView.dozedClick {
-                    callback.onItemSelected(movie)
-                }
             }
         }
     }

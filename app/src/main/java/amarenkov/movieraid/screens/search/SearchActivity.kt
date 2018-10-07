@@ -6,11 +6,8 @@ import amarenkov.movieraid.base.ListCallback
 import amarenkov.movieraid.models.Movie
 import amarenkov.movieraid.screens.DetailsBottomsheet
 import amarenkov.movieraid.screens.favorite.FavoriteActivity
+import amarenkov.movieraid.utils.*
 import amarenkov.movieraid.utils.customs.VerticalItemDecoration
-import amarenkov.movieraid.utils.dozedClick
-import amarenkov.movieraid.utils.hideKeyboard
-import amarenkov.movieraid.utils.increaseTouchArea
-import amarenkov.movieraid.utils.setState
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
@@ -41,6 +38,7 @@ class SearchActivity : BaseActivity(), ListCallback<Movie> {
         with(rv) {
             layoutManager = LinearLayoutManager(this@SearchActivity, RecyclerView.VERTICAL, false)
             setHasFixedSize(true)
+            adapterMovies.setHasStableIds(true)
             adapter = adapterMovies
             addItemDecoration(VerticalItemDecoration(resources.getDimensionPixelSize(R.dimen.item_spacing_4),
                     resources.getDimensionPixelSize(R.dimen.item_bottom_spacing), this@SearchActivity, RecyclerView.VERTICAL))
@@ -75,15 +73,19 @@ class SearchActivity : BaseActivity(), ListCallback<Movie> {
 
         etSearch.setOnEditorActionListener(TextView.OnEditorActionListener { tv, id, _ ->
             if (id == 1111 || id == EditorInfo.IME_NULL || id == EditorInfo.IME_ACTION_UNSPECIFIED
-                    || id == EditorInfo.IME_ACTION_DONE) {
+                    || id == EditorInfo.IME_ACTION_DONE) doze(2000L) {
                 if (tv.text.toString().isNotEmpty()) {
                     hideKeyboard()
+                    showPb()
                     viewModel.searchByName(tv.text.toString().toUri())
-                    pb.isVisible = true
                     return@OnEditorActionListener true
                 }
             }
             false
+        })
+
+        etSearch.setOnFocusChangeListener({ et, hasFocus ->
+            if (hasFocus) etSearch.showKeyboard()
         })
 
         btnFav.increaseTouchArea()
@@ -104,6 +106,7 @@ class SearchActivity : BaseActivity(), ListCallback<Movie> {
             hidePb()
             adapterMovies.clearList()
             adapterMovies.dispatchList(it)
+            rv.scrollToPosition(0)
             rv.scheduleLayoutAnimation()
         })
 
@@ -118,8 +121,7 @@ class SearchActivity : BaseActivity(), ListCallback<Movie> {
         val bottomsheetDialog = BottomSheetDialog(this, R.style.BottomsheetDialogStyle)
         bottomsheetDialog.setContentView(detailsBottomsheet)
         bottomsheetDialog.setOnCancelListener { viewModel.update(detailsBottomsheet.movie) }
-        detailsBottomsheet.enableToolbar { bottomsheetDialog.cancel() }
-        detailsBottomsheet.onShare = { poster, title, overview -> shareMovie(poster, title, overview) }
+        detailsBottomsheet.init({ bottomsheetDialog.cancel() }, { poster, title, overview -> shareMovie(poster, title, overview) })
         viewModel.movie.observe(this, Observer {
             detailsBottomsheet.bind(it)
             bottomsheetDialog.setState(BottomSheetBehavior.STATE_COLLAPSED)

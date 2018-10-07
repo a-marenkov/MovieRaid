@@ -24,9 +24,8 @@ class DetailsBottomsheet : CoordinatorLayout {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     lateinit var movie: MovieDetailed
-    var onShare: ((Bitmap?, String, String) -> Unit)? = null
 
-    fun enableToolbar(onClose: () -> Unit) {
+    fun init(onClose: () -> Unit, onShare: (Bitmap?, String, String) -> Unit) {
         scrollView.setOnScrollChangeListener(object : NestedScrollView.OnScrollChangeListener {
             override fun onScrollChange(v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
                 if (scrollY != 0 && !toolbar.isVisible) toolbar.animate().alpha(1f).setDuration(300L)
@@ -44,6 +43,17 @@ class DetailsBottomsheet : CoordinatorLayout {
             toolbar.isVisible = false
             toolbar.alpha = 0f
         }
+
+        ivFavorite.increaseTouchArea()
+        ivFavorite.dozedClick {
+            movie.isFavorite = !movie.isFavorite
+            toggleFavorite()
+        }
+
+        ivShare.increaseTouchArea()
+        ivShare.dozedClick {
+            onShare.invoke(ivPoster.drawable.toBitmap(), movie.title, movie.overview)
+        }
     }
 
     fun bind(movie: MovieDetailed) {
@@ -58,7 +68,6 @@ class DetailsBottomsheet : CoordinatorLayout {
                 holder_backdrop.isVisible = true
                 ivBackdrop.load(backdrop, ImageSize.ORIGINAL)
             }
-
             tvChip.text = getRating(resources)
             tvDuration.text = getDuration(resources)
             tvGenre.text = getGenres(resources)
@@ -70,18 +79,7 @@ class DetailsBottomsheet : CoordinatorLayout {
             tvTagline.setVisibilityAndText(tagline)
             tvCast.text = getCast(resources)
             tvCrew.text = getCrew(resources)
-
             toggleFavorite(false)
-            ivFavorite.increaseTouchArea()
-            ivFavorite.dozedClick {
-                movie.isFavorite = !movie.isFavorite
-                toggleFavorite()
-            }
-
-            ivShare.increaseTouchArea()
-            ivShare.dozedClick {
-                onShare?.invoke(ivPoster.drawable.toBitmap(), movie.title, movie.overview)
-            }
         }
     }
 

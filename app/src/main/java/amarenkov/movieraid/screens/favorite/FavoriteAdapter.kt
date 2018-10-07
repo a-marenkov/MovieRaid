@@ -50,6 +50,8 @@ class FavoriteMoviesAdapter(private val callback: ListCallback<Movie>) : Recycle
 
     override fun getItemCount() = movies.size
 
+    override fun getItemId(position: Int) = movies[position].id
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieVH {
         return MovieVH(LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_movie_favorite, parent, false))
@@ -76,11 +78,14 @@ class FavoriteMoviesAdapter(private val callback: ListCallback<Movie>) : Recycle
         (viewHolder as? MovieVH)?.remove()
     }
 
-    inner class MovieVH(view: View) : RecyclerView.ViewHolder(view) {
+    inner class MovieVH(root: View) : RecyclerView.ViewHolder(root) {
+        init {
+            root.dozedClick { callback.onItemSelected(movies[adapterPosition]) }
+        }
+
         fun onBind(movie: Movie) {
             itemView.ivPoster.load(movie.poster, ImageSize.ORIGINAL)
             itemView.tvRating.text = movie.rating.toString()
-            itemView.dozedClick { callback.onItemSelected(movies[adapterPosition]) }
         }
 
         fun remove() {
