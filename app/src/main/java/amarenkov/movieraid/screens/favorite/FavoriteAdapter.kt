@@ -2,10 +2,11 @@ package amarenkov.movieraid.screens.favorite
 
 import amarenkov.movieraid.R
 import amarenkov.movieraid.base.ListCallback
-import amarenkov.movieraid.models.Movie
-import amarenkov.movieraid.models.MovieDetailed
 import amarenkov.movieraid.network.ImageSize
+import amarenkov.movieraid.room.models.Movie
+import amarenkov.movieraid.room.models.MovieDetailed
 import amarenkov.movieraid.utils.FIRST_POSITION
+import amarenkov.movieraid.utils.customs.SnappyAdapter
 import amarenkov.movieraid.utils.dozedClick
 import amarenkov.movieraid.utils.load
 import android.view.LayoutInflater
@@ -16,21 +17,28 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import kotlinx.android.synthetic.main.item_movie_favorite.view.*
 
-class FavoriteMoviesAdapter(private val callback: ListCallback<Movie>) : RecyclerView.Adapter<FavoriteMoviesAdapter.MovieVH>() {
+class FavoriteMoviesAdapter(private val callback: ListCallback<Movie>,
+                            private val onItemFocused: (String) -> Unit) : SnappyAdapter<FavoriteMoviesAdapter.MovieVH>() {
 
     private val movies = mutableListOf<Movie>()
     private var removedMovie: Movie? = null
     private var removedMoviePosition = FIRST_POSITION
+    private var focusedItem = -1
+
+    override fun onItemCentered(position: Int) {
+        focusedItem = position
+        onItemFocused(if (position == NO_POSITION) "" else movies[position].titleAndYear)
+    }
 
     fun clearList() {
         val count = itemCount
-        if(count == 0) return
+        if (count == 0) return
         movies.clear()
         notifyItemRangeRemoved(FIRST_POSITION, count)
     }
 
     fun dispatchList(list: List<Movie>) {
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             callback.onListEmpty()
         } else {
             movies.addAll(list)
@@ -61,11 +69,6 @@ class FavoriteMoviesAdapter(private val callback: ListCallback<Movie>) : Recycle
         holder.onBind(movies[position])
     }
 
-    fun getLabel(position: Int): String {
-        return if (position == NO_POSITION) ""
-        else movies[position].titleAndYear
-    }
-
     fun remove(movie: MovieDetailed) {
         movies.indexOfFirst { it.id == movie.id }.let {
             if (it == NO_POSITION) return
@@ -80,7 +83,10 @@ class FavoriteMoviesAdapter(private val callback: ListCallback<Movie>) : Recycle
 
     inner class MovieVH(root: View) : RecyclerView.ViewHolder(root) {
         init {
-            root.dozedClick { callback.onItemSelected(movies[adapterPosition]) }
+            root.dozedClick {
+                callback.onItemSelected(movies[adapterPosition])
+                if (adapterPosition != focusedItem) mScroller?.smoothSnapToPosition(adapterPosition)
+            }
         }
 
         fun onBind(movie: Movie) {
@@ -90,7 +96,7 @@ class FavoriteMoviesAdapter(private val callback: ListCallback<Movie>) : Recycle
 
         fun remove() {
             removedMoviePosition = adapterPosition
-            callback.onItemRemove(movies[adapterPosition])
+            callback.onItemRemoved(movies[adapterPosition])
             removedMovie = movies.removeAt(adapterPosition)
             notifyItemRemoved(adapterPosition)
         }

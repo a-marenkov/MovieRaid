@@ -1,7 +1,7 @@
-package amarenkov.movieraid.models
+package amarenkov.movieraid.room.models
 
 import amarenkov.movieraid.base.BaseEntity
-import amarenkov.movieraid.room.AppDatabase
+import amarenkov.movieraid.room.db.AppDatabase
 import androidx.room.Entity
 
 @Entity(tableName = AppDatabase.GENRES_TABLE)

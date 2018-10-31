@@ -23,7 +23,7 @@
     <string name="share_text">Рекомендую посмотреть фильм "%1$s"\n%2$s</string>
     <string name="snack_removed_from_favs">Фильм исключен из избранных</string>
     <string name="snack_no_internet">Нет интернет соединения</string>
-    <string name="snack_error">Ошибка - что-то пошло не так…</string>
+    <string name="snack_unknown_error">Ошибка - что-то пошло не так…</string>
     <string name="snack_added_to_favs">Фильм добавлен в избранное</string>
     <string name="hint_search">Поиск по названию</string>
     <string name="favorites">Избранное</string>

@@ -1,10 +1,10 @@
 package amarenkov.movieraid.screens.search
 
 import amarenkov.movieraid.R
-import amarenkov.movieraid.base.BaseActivity
+import amarenkov.movieraid.base.BaseViewActivity
 import amarenkov.movieraid.base.ListCallback
-import amarenkov.movieraid.models.Movie
-import amarenkov.movieraid.screens.DetailsBottomsheet
+import amarenkov.movieraid.room.models.Movie
+import amarenkov.movieraid.screens.bottomsheets.DetailsBottomsheet
 import amarenkov.movieraid.screens.favorite.FavoriteActivity
 import amarenkov.movieraid.utils.*
 import amarenkov.movieraid.utils.customs.VerticalItemDecoration
@@ -22,7 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_search.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchActivity : BaseActivity(), ListCallback<Movie> {
+class SearchActivity : BaseViewActivity(), ListCallback<Movie> {
 
     override val viewModel: SearchViewModel by viewModel()
     private var isMoreEnabled = false
@@ -73,7 +73,7 @@ class SearchActivity : BaseActivity(), ListCallback<Movie> {
 
         etSearch.setOnEditorActionListener(TextView.OnEditorActionListener { tv, id, _ ->
             if (id == 1111 || id == EditorInfo.IME_NULL || id == EditorInfo.IME_ACTION_UNSPECIFIED
-                    || id == EditorInfo.IME_ACTION_DONE) doze(2000L) {
+                    || id == EditorInfo.IME_ACTION_DONE) doze(1000L) {
                 if (tv.text.toString().isNotEmpty()) {
                     hideKeyboard()
                     showPb()
@@ -143,7 +143,7 @@ class SearchActivity : BaseActivity(), ListCallback<Movie> {
         viewModel.getMovieDetails(item.id)
     }
 
-    override fun onItemRemove(item: Movie) {}
+    override fun onItemRemoved(item: Movie) {}
 
     override fun showPb() {
         pb.isVisible = true

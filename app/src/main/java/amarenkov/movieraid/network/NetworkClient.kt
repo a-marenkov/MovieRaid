@@ -14,10 +14,8 @@ object NetworkClient {
         sp.getString(KEY_IMG_URL, "https://image.tmdb.org/t/p/") ?: "https://image.tmdb.org/t/p/"
     }
 
-    fun hasConnection(): Boolean {
-        return getFromKoin<Context>().getSystemService<ConnectivityManager>()
-                ?.activeNetworkInfo != null
-    }
+    fun hasConnection() = getFromKoin<Context>().getSystemService<ConnectivityManager>()
+            ?.activeNetworkInfo != null
 }
 
 enum class ImageSize(val size: String) {

@@ -1,4 +1,4 @@
-package amarenkov.movieraid.models
+package amarenkov.movieraid.room.models
 
 import com.google.gson.annotations.SerializedName
 

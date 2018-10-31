@@ -42,53 +42,65 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.0.0'
-    implementation "com.google.android.material:material:1.0.0"
+    implementation 'com.google.android.material:material:1.0.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.30.0'
+
     // androidx
-    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.media:media:1.0.0'
-//    implementation 'androidx.vectordrawable:vectordrawable-animated:1.0.0'
+
+    //    implementation 'androidx.vectordrawable:vectordrawable-animated:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+
     // Flexbox
-//    implementation 'com.google.android:flexbox:1.1.0'
+
+    //    implementation 'com.google.android:flexbox:1.1.0'
+
     // Room
     implementation 'androidx.room:room-runtime:2.0.0'
     kapt "androidx.room:room-compiler:2.0.0"
+
     // ViewModel and LiveData
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-common-java8:2.0.0'
+
     // workmanager
-    implementation "android.arch.work:work-runtime-ktx:1.0.0-alpha09"
+    implementation 'android.arch.work:work-runtime-ktx:1.0.0-alpha10'
+
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+
     // Koin for Kotlin
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+
     // Gson
     implementation 'com.google.code.gson:gson:2.8.5'
+
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
-//    implementation 'jp.wasabeef:glide-transformations:3.3.0'
+
+    //    implementation 'jp.wasabeef:glide-transformations:3.3.0'
+
     // jobdispatcher
-    implementation "com.firebase:firebase-jobdispatcher:0.8.5"
+    implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
 
-//    implementation 'androidx.multidex:multidex:2.0.0'
-
+    //    implementation 'androidx.multidex:multidex:2.0.0'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.8.9'
     androidTestImplementation 'org.mockito:mockito-android:2.8.9'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
-    androidTestImplementation 'androidx.test:rules:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
+    androidTestImplementation 'androidx.test:rules:1.1.0-beta02'
 }
 kotlin {
     experimental {

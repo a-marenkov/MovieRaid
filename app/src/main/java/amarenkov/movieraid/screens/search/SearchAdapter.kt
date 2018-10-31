@@ -3,8 +3,8 @@ package amarenkov.movieraid.screens.search
 import amarenkov.movieraid.R
 import amarenkov.movieraid.base.ListCallback
 import amarenkov.movieraid.managers.MovieManager
-import amarenkov.movieraid.models.Movie
 import amarenkov.movieraid.network.ImageSize
+import amarenkov.movieraid.room.models.Movie
 import amarenkov.movieraid.utils.FIRST_POSITION
 import amarenkov.movieraid.utils.dozedClick
 import amarenkov.movieraid.utils.load

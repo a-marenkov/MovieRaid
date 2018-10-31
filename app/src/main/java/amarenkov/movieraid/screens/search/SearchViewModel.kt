@@ -1,9 +1,9 @@
 package amarenkov.movieraid.screens.search
 
+import amarenkov.movieraid.room.models.Movie
+import amarenkov.movieraid.room.repos.MoviesRepo
+import amarenkov.movieraid.screens.bottomsheets.DetailsViewModel
 import amarenkov.movieraid.utils.bg
-import amarenkov.movieraid.models.Movie
-import amarenkov.movieraid.repo.MoviesRepo
-import amarenkov.movieraid.screens.DetailsViewModel
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 

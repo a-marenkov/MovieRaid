@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
         }.invokeOnCompletion {
             it?.let {
                 if (NetworkClient.hasConnection()) snack(it.message
-                        ?: getString(R.string.snack_error))
+                        ?: getString(R.string.snack_unknown_error))
                 else snack(getString(R.string.snack_no_internet), Snackbar.LENGTH_INDEFINITE, getString(R.string.repeat), { init() })
             }.ifNull {
                 proceed()

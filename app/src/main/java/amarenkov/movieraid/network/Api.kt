@@ -1,9 +1,9 @@
 package amarenkov.movieraid.network
 
-import amarenkov.movieraid.models.Configuration
-import amarenkov.movieraid.models.GenresResponse
-import amarenkov.movieraid.models.MovieDetailed
-import amarenkov.movieraid.models.MovieSearchResponse
+import amarenkov.movieraid.room.models.Configuration
+import amarenkov.movieraid.room.models.GenresResponse
+import amarenkov.movieraid.room.models.MovieDetailed
+import amarenkov.movieraid.room.models.MovieSearchResponse
 import android.net.Uri
 import retrofit2.Call
 import retrofit2.http.GET
@@ -24,6 +24,6 @@ interface TmdbApi {
     @GET("/3/movie/{id}?api_key=${NetworkClient.API_KEY}&append_to_response=credits")
     fun getMovieDetails(@Path("id") id: Long, @Query("language") language: String = "ru-RU"): Call<MovieDetailed>
 
-    @GET("3/configuration?api_key=${NetworkClient.API_KEY}")
+    @GET("/3/configuration?api_key=${NetworkClient.API_KEY}")
     fun getConfiguration(): Call<Configuration>
 }

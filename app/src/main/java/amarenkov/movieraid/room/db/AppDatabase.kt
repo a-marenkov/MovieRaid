@@ -1,9 +1,9 @@
-package amarenkov.movieraid.room
+package amarenkov.movieraid.room.db
 
-import amarenkov.movieraid.models.Genre
-import amarenkov.movieraid.models.MovieDetailed
-import amarenkov.movieraid.repo.MoviesDao
-import amarenkov.movieraid.room.dao.GenresDao
+import amarenkov.movieraid.room.models.Genre
+import amarenkov.movieraid.room.models.MovieDetailed
+import amarenkov.movieraid.room.repos.GenresDao
+import amarenkov.movieraid.room.repos.MoviesDao
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters

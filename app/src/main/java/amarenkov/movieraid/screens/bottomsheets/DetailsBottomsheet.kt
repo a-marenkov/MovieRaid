@@ -1,8 +1,8 @@
-package amarenkov.movieraid.screens
+package amarenkov.movieraid.screens.bottomsheets
 
 import amarenkov.movieraid.R
-import amarenkov.movieraid.models.MovieDetailed
 import amarenkov.movieraid.network.ImageSize
+import amarenkov.movieraid.room.models.MovieDetailed
 import amarenkov.movieraid.utils.dozedClick
 import amarenkov.movieraid.utils.increaseTouchArea
 import amarenkov.movieraid.utils.load

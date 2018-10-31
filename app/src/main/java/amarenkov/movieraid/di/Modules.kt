@@ -1,13 +1,13 @@
 package amarenkov.movieraid.di
 
 import amarenkov.movieraid.BuildConfig
-import amarenkov.movieraid.utils.SP_NAME
 import amarenkov.movieraid.network.NetworkClient
 import amarenkov.movieraid.network.TmdbApi
-import amarenkov.movieraid.repo.MoviesRepo
-import amarenkov.movieraid.room.AppDatabase
+import amarenkov.movieraid.room.db.AppDatabase
+import amarenkov.movieraid.room.repos.MoviesRepo
 import amarenkov.movieraid.screens.favorite.FavoriteViewModel
 import amarenkov.movieraid.screens.search.SearchViewModel
+import amarenkov.movieraid.utils.SP_NAME
 import android.content.Context
 import androidx.room.Room
 import com.google.gson.GsonBuilder

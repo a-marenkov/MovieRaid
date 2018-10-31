@@ -1,7 +1,7 @@
-package amarenkov.movieraid.room.dao
+package amarenkov.movieraid.room.repos
 
-import amarenkov.movieraid.models.Genre
-import amarenkov.movieraid.room.AppDatabase
+import amarenkov.movieraid.room.db.AppDatabase
+import amarenkov.movieraid.room.models.Genre
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query

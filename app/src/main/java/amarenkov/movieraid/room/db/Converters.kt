@@ -1,9 +1,9 @@
-package amarenkov.movieraid.room
+package amarenkov.movieraid.room.db
 
+import amarenkov.movieraid.room.models.CastMember
+import amarenkov.movieraid.room.models.CrewMember
+import amarenkov.movieraid.room.models.Genre
 import amarenkov.movieraid.utils.getFromKoin
-import amarenkov.movieraid.models.CastMember
-import amarenkov.movieraid.models.CrewMember
-import amarenkov.movieraid.models.Genre
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

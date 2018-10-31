@@ -2,8 +2,8 @@ package amarenkov.movieraid.managers
 
 import amarenkov.movieraid.network.NetworkClient.KEY_IMG_URL
 import amarenkov.movieraid.network.TmdbApi
-import amarenkov.movieraid.repo.MoviesDao
-import amarenkov.movieraid.room.dao.GenresDao
+import amarenkov.movieraid.room.repos.GenresDao
+import amarenkov.movieraid.room.repos.MoviesDao
 import amarenkov.movieraid.utils.getFromKoin
 import amarenkov.movieraid.utils.now
 import amarenkov.movieraid.utils.sp

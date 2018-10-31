@@ -1,18 +1,15 @@
 package amarenkov.movieraid.screens.favorite
 
 import amarenkov.movieraid.R
-import amarenkov.movieraid.base.BaseActivity
+import amarenkov.movieraid.base.BaseViewActivity
 import amarenkov.movieraid.base.ListCallback
-import amarenkov.movieraid.models.Movie
-import amarenkov.movieraid.screens.DetailsBottomsheet
-import amarenkov.movieraid.utils.FIRST_POSITION
-import amarenkov.movieraid.utils.customs.HorizontalItemDecoration
+import amarenkov.movieraid.room.models.Movie
+import amarenkov.movieraid.screens.bottomsheets.DetailsBottomsheet
 import amarenkov.movieraid.utils.setState
 import amarenkov.movieraid.utils.switchText
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -24,11 +21,12 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_favorite.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
-class FavoriteActivity : BaseActivity(), ListCallback<Movie> {
+class FavoriteActivity : BaseViewActivity(), ListCallback<Movie> {
 
     override val viewModel by viewModel<FavoriteViewModel>()
-    private val adapter by lazy { FavoriteMoviesAdapter(this) }
+    private val adapter by lazy {
+        FavoriteMoviesAdapter(this) { tvHeader.switchText(it) }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,18 +43,6 @@ class FavoriteActivity : BaseActivity(), ListCallback<Movie> {
             setHasFixedSize(true)
             this@FavoriteActivity.adapter.setHasStableIds(true)
             adapter = this@FavoriteActivity.adapter
-            onItemSelected = { position ->
-                tvHeader.switchText(this@FavoriteActivity.adapter.getLabel(position))
-            }
-            val dpWidth = resources.displayMetrics.widthPixels
-            val cardWidth = resources.displayMetrics.heightPixels * 0.65f * 0.65f
-            val edgeOffset = (dpWidth - cardWidth) / 2
-
-            addItemDecoration(HorizontalItemDecoration(
-                    resources.getDimensionPixelSize(R.dimen.item_spacing_8),
-                    edgeOffset.toInt(),
-                    this@FavoriteActivity,
-                    LinearLayout.HORIZONTAL))
 
             ItemTouchHelper(SwipeTouchHelperCallback(this@FavoriteActivity.adapter)).also {
                 it.attachToRecyclerView(this)
@@ -64,13 +50,15 @@ class FavoriteActivity : BaseActivity(), ListCallback<Movie> {
 
             layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_slide_from_end)
 
-            tvHeader.layoutParams = tvHeader.layoutParams.apply { width = cardWidth.toInt() }
+            rv.set(item_movie_favorite, 0)
+            item_movie_favorite.post {
+                tvHeader.layoutParams = tvHeader.layoutParams.apply { width = item_movie_favorite.width }
+            }
         }
 
         viewModel.movies.observe(this, Observer {
             hidePb()
             adapter.clearList()
-            rv.scrollToPosition(FIRST_POSITION)
             adapter.dispatchList(it)
             rv.scheduleLayoutAnimation()
         })
@@ -109,10 +97,10 @@ class FavoriteActivity : BaseActivity(), ListCallback<Movie> {
         viewModel.getMovieDetails(item.id)
     }
 
-    override fun onItemRemove(item: Movie) {
+    override fun onItemRemoved(item: Movie) {
         viewModel.removeFromFavorites(item.id)
         snack(R.string.snack_removed_from_favs, Snackbar.LENGTH_LONG, R.string.cancel, {
-            rv.smoothSnapTo(adapter.undoRemoval())
+            rv.smoothSnapToPosition(adapter.undoRemoval())
             viewModel.setAsFavorite(item.id)
         })
     }
@@ -123,7 +111,6 @@ class FavoriteActivity : BaseActivity(), ListCallback<Movie> {
 
     override fun onListShown() {
         tvEmpty.isVisible = false
-        rv.onItemSelected?.invoke(FIRST_POSITION)
     }
 }
 

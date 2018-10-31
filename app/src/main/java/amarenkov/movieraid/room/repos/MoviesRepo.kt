@@ -1,8 +1,8 @@
-package amarenkov.movieraid.repo
+package amarenkov.movieraid.room.repos
 
-import amarenkov.movieraid.models.MovieDetailed
-import amarenkov.movieraid.models.MovieSearchResponse
 import amarenkov.movieraid.network.TmdbApi
+import amarenkov.movieraid.room.models.MovieDetailed
+import amarenkov.movieraid.room.models.MovieSearchResponse
 import android.net.Uri
 
 class MoviesRepo(private val db: MoviesDao, private val api: TmdbApi) {

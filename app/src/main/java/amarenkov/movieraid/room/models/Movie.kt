@@ -1,8 +1,8 @@
-package amarenkov.movieraid.models
+package amarenkov.movieraid.room.models
 
 import amarenkov.movieraid.R
 import amarenkov.movieraid.base.BaseEntity
-import amarenkov.movieraid.room.AppDatabase
+import amarenkov.movieraid.room.db.AppDatabase
 import amarenkov.movieraid.utils.convertToMoneyString
 import amarenkov.movieraid.utils.getPluralString
 import amarenkov.movieraid.utils.now
@@ -29,24 +29,24 @@ class Movie(var id: Long = -1,
 }
 
 @Entity(tableName = AppDatabase.MOVIES_TABLE, indices = [Index("id")])
-data class MovieDetailed(val id: Long,
-                         val title: String,
-                         val overview: String,
-                         @SerializedName("release_date") val date: String,
-                         @SerializedName("original_title") val titleOriginal: String,
-                         @SerializedName("original_language") val language: String,
-                         val genres: List<Genre>,
-                         @SerializedName("poster_path") val poster: String,
+data class MovieDetailed(val id: Long = -1L,
+                         val title: String = "",
+                         val overview: String = "",
+                         @SerializedName("release_date") val date: String = "",
+                         @SerializedName("original_title") val titleOriginal: String = "",
+                         @SerializedName("original_language") val language: String = "",
+                         val genres: List<Genre> = listOf(),
+                         @SerializedName("poster_path") val poster: String = "",
                          @SerializedName("backdrop_path") val backdrop: String = "",
-                         @SerializedName("vote_average") val rating: Float,
-                         @SerializedName("vote_count") val voteCount: Int,
-                         @SerializedName("adult") val isAdult: Boolean,
-                         val popularity: Float,
-                         val budget: Int,
-                         val homepage: String,
-                         val revenue: Int,
-                         val runtime: Int,
-                         val tagline: String,
+                         @SerializedName("vote_average") val rating: Float = 0.0f,
+                         @SerializedName("vote_count") val voteCount: Int = 0,
+                         @SerializedName("adult") val isAdult: Boolean = false,
+                         val popularity: Float = 0f,
+                         val budget: Int = 0,
+                         val homepage: String = "",
+                         val revenue: Int = 0,
+                         val runtime: Int = 0,
+                         val tagline: String = "",
                          @Embedded val credits: Credits,
                          var isFavorite: Boolean = false,
                          var isWatchLater: Boolean = false,
@@ -89,8 +89,8 @@ data class MovieDetailed(val id: Long,
     }
 }
 
-data class Credits(val cast: List<CastMember>,
-                   val crew: List<CrewMember>)
+data class Credits(val cast: List<CastMember> = listOf(),
+                   val crew: List<CrewMember> = listOf())
 
 data class CastMember(val name: String,
                       val character: String)

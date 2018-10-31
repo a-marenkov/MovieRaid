@@ -3,6 +3,7 @@ package amarenkov.movieraid.utils
 import amarenkov.movieraid.R
 import amarenkov.movieraid.network.ImageSize
 import amarenkov.movieraid.network.NetworkClient
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
@@ -10,6 +11,7 @@ import android.graphics.Rect
 import android.util.Log
 import android.view.TouchDelegate
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -28,6 +30,26 @@ import org.koin.standalone.StandAloneContext
 fun <T> Any.ui(block: suspend CoroutineScope.() -> T): Deferred<T> = GlobalScope.async(Dispatchers.Main, block = block)
 
 inline fun <reified T : Any> getFromKoin(name: String = "") = (StandAloneContext.koinContext as KoinContext).get<T>(name)
+
+fun View.showKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+}
+
+fun View.hideKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(getWindowToken(), 0)
+}
+
+fun Activity.showKeyboard() {
+    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+}
+
+fun Activity.hideKeyboard() {
+    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+}
 
 val String.logd: String
     get() {
@@ -102,10 +124,13 @@ fun TextView.setVisibilityAndText(text: String) {
 
 fun TextView.switchText(text: String) {
     if (this.text == text) return
-    animate().alpha(0f)
+    if (alpha != 0f) animate().alpha(0f)
             .withEndAction {
                 this.text = text
-                animate().alpha(1f).start()
+                if (text.isNotBlank()) animate().alpha(1f).start()
             }
+            .start()
+    else animate().alpha(1f)
+            .withStartAction { this.text = text }
             .start()
 }

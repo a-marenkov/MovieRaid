@@ -6,6 +6,8 @@
     android:clickable="true"
     android:foreground="@drawable/bg_transparent_btn_ripple"
     app:cardCornerRadius="8dp"
+    android:layout_marginStart="@dimen/item_spacing_8"
+    android:layout_marginEnd="@dimen/item_spacing_8"
     app:cardElevation="12dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout

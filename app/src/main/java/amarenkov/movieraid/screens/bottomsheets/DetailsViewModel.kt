@@ -1,12 +1,12 @@
-package amarenkov.movieraid.screens
+package amarenkov.movieraid.screens.bottomsheets
 
-import amarenkov.movieraid.utils.bg
 import amarenkov.movieraid.base.BaseViewModel
 import amarenkov.movieraid.base.EventLiveData
-import amarenkov.movieraid.models.MovieDetailed
-import amarenkov.movieraid.repo.MoviesRepo
+import amarenkov.movieraid.room.models.MovieDetailed
+import amarenkov.movieraid.room.repos.MoviesRepo
+import amarenkov.movieraid.utils.bg
 
-open class DetailsViewModel(protected val repo: MoviesRepo) : BaseViewModel() {
+abstract class DetailsViewModel(protected val repo: MoviesRepo) : BaseViewModel() {
 
     val movie = EventLiveData<MovieDetailed>()
 

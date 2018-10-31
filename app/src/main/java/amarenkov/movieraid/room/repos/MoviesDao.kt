@@ -1,8 +1,8 @@
-package amarenkov.movieraid.repo
+package amarenkov.movieraid.room.repos
 
-import amarenkov.movieraid.models.Movie
-import amarenkov.movieraid.models.MovieDetailed
-import amarenkov.movieraid.room.AppDatabase
+import amarenkov.movieraid.room.db.AppDatabase
+import amarenkov.movieraid.room.models.Movie
+import amarenkov.movieraid.room.models.MovieDetailed
 import androidx.room.*
 
 @Dao
